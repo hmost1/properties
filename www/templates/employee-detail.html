@@ -1,19 +1,38 @@
-<ion-view title="Employee">
-
+<ion-view title="{{employee.description}}">
     <ion-content has-header="true" padding="true">
 
         <div class="list card">
             <div class="item item-avatar">
-                <img src="pics/{{employee.pic }}"/>
-                <h2>{{employee.firstName}} {{employee.lastName}}</h2>
-                <p>{{employee.title}}</p>
+                <img src="pics/{{employee.id}}.png"/>
+                <h2></h2>
+                <p>Available</p>
             </div>
             <a class="item item-icon-left" href="#/employees/{{employee.managerId}}" ng-if="employee.managerId > -1"><i class="icon ion-ios7-person"></i>View Manager<p>{{employee.managerName}}</p></a>
             <a class="item item-icon-left" href="#/employees/{{employee.id}}/reports" ng-if="employee.reports > 0"><i class="icon ion-person-stalker"></i>View Direct Reports<p>{{employee.reports}}</p></a>
-            <a class="item item-icon-left" href="tel:{{employee.officePhone}}"><i class="icon ion-ios7-telephone"></i>Call Office<p>{{employee.officePhone}}</p></a>
-            <a class="item item-icon-left" href="tel:{{employee.cellPhone}}"><i class="icon ion-ios7-telephone"></i>Call Cell<p>{{employee.cellPhone}}</p></a>
-            <a class="item item-icon-left" href="sms:{{employee.cellPhone}}"><i class="icon ion-chatbox-working"></i>SMS<p>{{employee.cellPhone}}</p></a>
-            <a class="item item-icon-left" href="mailto:{{employee.email}}"><i class="icon ion-ios7-email"></i>Email<p>{{employee.email}}</p></a>
+            <i class="fa fa-bed" aria-hidden="true"></i>
+
+            <a class="item item-icon-left">
+                <i class="icon icon-fa-bed"></i>
+                Bedrooms
+                <p>{{employee.bedrooms}}</p>
+            </a>
+            <a class="item item-icon-left">
+                <i class="icon icon-fa-bath"></i>
+                Bathrooms
+                <p>{{employee.bathrooms}}</p>
+            </a>
+            <a class="item item-icon-left">
+                <i class="icon ion-social-usd"></i>
+                Nightly Rate
+                <p>{{employee.nightly}}</p>
+            </a>
+            <a class="item item-icon-left">
+                <i class="icon ion-social-usd-outline"></i>
+                Monthly Rate
+                <p>{{employee.monthly}}</p>
+            </a>
+            <!--<a class="item item-icon-left" href="sms:{{employee.cellPhone}}"><i class="icon ion-chatbox-working"></i>SMS<p>{{employee.cellPhone}}</p></a>
+            <a class="item item-icon-left" href="mailto:{{employee.email}}"><i class="icon ion-ios7-email"></i>Email<p>{{employee.email}}</p></a>-->
         </div>
 
     </ion-content>

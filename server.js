@@ -11,9 +11,16 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.get('/employees', employees.findAll);
-app.get('/employees/:id', employees.findById);
-app.get('/employees/:id/reports', employees.findReports);
+app.get('/properties', employees.findAll);
+app.get('/properties/:id', employees.findById);
+app.get('/properties/:id/stats', employees.findReports);
+
+app.get('/buildings', employees.findAllBuildings);
+app.get('/buildings/:id', employees.findBuildingById);
+app.get('/buildings/:id/properties', employees.findAllFromBuilding);
+
+//TODO: not sure if this needs to be structured like that 
+app.get('/buildings/:buildingId/properties/:id', employees.findById);
 
 app.set('port', process.env.PORT || 5000);
 

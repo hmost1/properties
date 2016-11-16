@@ -1,4 +1,4 @@
-<ion-view title="Employees">
+<ion-view title="Your Properties">
 
     <div class="bar bar-subheader item-input-inset">
         <label class="item-input-wrapper">
@@ -8,14 +8,13 @@
         </label>
         <button class="button button-clear" ng-click="search()">Search</button>
     </div>
-
     <ion-content class="has-header has-subheader">
         <ion-list>
-            <ion-item ng-repeat="employee in employees" type="item-text-wrap" class="item-avatar"
-                      href="#/employees/{{employee.id}}">
-                <img src="pics/{{employee.pic}}"/>
-                {{employee.firstName}} {{employee.lastName}}
-                <p>{{employee.title}}</p>
+            <ion-item ng-repeat="property in employees" type="item-text-wrap" class="item-avatar"
+                      href="#/tab/search/{{property.id}}">
+                <img src="pics/{{property.id}}.png"/>
+                {{property.description}}
+                <p>{{property.number}} {{property.street}}, {{property.city}}</p>
             </ion-item>
         </ion-list>
     </ion-content>
