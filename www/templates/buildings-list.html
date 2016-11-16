@@ -1,0 +1,35 @@
+<ion-view title="Your Properties">
+
+    <div class="bar bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input id="searchKey" type="search" placeholder="Search" ng-model="searchKey" autocorrect="off" >
+            <button class="button button-clear" ng-click="clearSearch()">X</button>
+        </label>
+        <button class="button button-clear" ng-click="search()">Search</button>
+    </div>
+    <ion-content class="has-header has-subheader">
+        <ion-list>
+            <ion-item ng-repeat="building in buildings" type="item-text-wrap" class="row"
+                      href="#/tab/buildings/{{building.id}}/properties">
+                <div class='horizontal building-address'>{{building.number}}<p>{{building.street}}</div>
+                <div class='horizontal building-info'>{{building.city}}, {{building.state}}
+                    <p>{{building.vacant + building.occupied}} Units total
+                    <span ng-class="(building.vacant==0) ? 'red' : 'green'">{{building.vacant}}
+                        <ng-pluralize count="building.vacant" when="{'1':'vacancy','other':'vacancies'}">
+                        </ng-pluralize>
+                    </span>
+                    </p>
+                </div>
+           </ion-item>
+           <!--<div type="item-text-wrap" class="item row">
+                <div class='horizontal building-address'>test</div>
+                <div class='horizontal building-info'>asldjfh</div>
+           </div>
+            <a class="item item-icon-left" href="#/tab/buildings/new">
+                <i class="icon ion-plus"></i>
+            </a>-->
+        </ion-list>
+    </ion-content>
+
+</ion-view>
