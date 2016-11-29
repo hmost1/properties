@@ -10,10 +10,16 @@
     <ion-content class="has-header has-subheader">
         <ion-list>
             <ion-item ng-repeat="property in building.properties" type="item-text-wrap" class="item-avatar" href="#/tab/buildings/{{building.id}}/properties/{{property.id}}">
-            <div class='horizontal building-address text-center'>Apt {{property.apt}}</div>
-            <div class='horizontal building-info'>
-            Furnished
-            <p> {{property.bedrooms}} BR / {{property.bathrooms}} BR; {{building.squareFeet}} SF </p>
+                <div class='horizontal building-address text-center'>Apt {{property.apt}}</div>
+                <div class='horizontal building-info'>
+                Furnished
+                <p> {{property.bedrooms}} BR / {{property.bathrooms}} BR; {{building.squareFeet}} SF </p>
+                </div>
+            </ion-item>
+            <ion-item> 
+                <a class="button item-icon-left" href="#/tab/buildings/{{building.id}}/properties/new">
+                    <i class="icon ion-plus"></i>
+                </a>
             </ion-item>
         </ion-list>
     </ion-content>

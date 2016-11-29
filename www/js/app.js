@@ -106,12 +106,30 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
                 }}
             })
 
+            .state('tab.buildings-new', {
+                url: '/buildings/new',
+                views: {
+                "tab-buildings": {
+                    templateUrl: 'templates/buildings-new.html',
+                    controller: 'NewBuildingCtrl'
+                }}
+            })
+
             .state('tab.building-properties', {
                 url: '/buildings/:buildingId/properties',
                 views: {
                 "tab-buildings": {
                     templateUrl: 'templates/building-properties.html',
                     controller: 'PropertiesbyBuildingsListCtrl'
+                }}
+            })
+
+            .state('tab.properties-new', {
+                url: '/buildings/:buildingId/properties/new',
+                views: {
+                "tab-buildings": {
+                    templateUrl: 'templates/properties-new.html',
+                    controller: 'NewPropertybyBuildingsListCtrl'
                 }}
             })
 

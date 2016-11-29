@@ -1,0 +1,26 @@
+<ion-view title="New Space">
+    <ion-content has-header="true" padding="true">
+
+    <div class="list">
+      <label class="item item-input">
+            <input type="text" placeholder="Apt Number" ng-model="property.apt">
+        </label>
+        <label class="item item-input">
+            <input type="text" placeholder="Max Guests" ng-model="property.guests">
+        </label>
+        <label class="item item-input">
+            <input type="text" placeholder="Bedrooms" ng-model="property.bedrooms">
+        </label>
+        <label class="item item-input">
+            <input type="text" placeholder="Beds" ng-model="property.beds">
+        </label>
+   <label class="item item-input">
+        <input type="text" placeholder="Bathrooms" ng-model="property.bathrooms">
+   </label>
+   <a class="button item-button" ng-click="add()" href="#/tab/buildings/{{buildingId}}/properties">
+       Save
+    </a>
+</div>
+    </ion-content>
+
+</ion-view>
