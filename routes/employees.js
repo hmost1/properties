@@ -98,12 +98,36 @@ exports.findAllFromBuilding = function(req, res, next) {
 
     for (var i=0; i<properties.length; i++) {
         property = properties[i];
+
         if (property.buildingId === id) {
-            spaces.push(property);
+            spaces.push(property);        
         }
     }
 
     response.properties = spaces;
-    console.log("properties from building")
     res.send(response);
+}
+
+exports.addNewBuilding = function(req, res, next) {
+
+    //todo: building object, new building()
+    var building = req.body; 
+    building.id = buildings.length + 1;
+    building.vacant = 0; 
+    building.occupied = 0;
+    buildings.push(building);
+    
+    res.send(200)
+}
+
+exports.addNewProperty = function(req, res, next) {
+    //todo: property object, new property()
+    var property = req.body;
+    property.id = properties.length + 1; 
+    property.buildingId = parseInt(property.buildingId);
+    properties.push(property);
+    
+    buildings[property.buildingId-1].vacant += 1;
+
+    res.send(200);
 }

@@ -1,0 +1,26 @@
+<ion-view title="New Building">
+    <ion-content has-header="true" padding="true">
+
+    <div class="list">
+        <label class="item item-input">
+            <input type="text" placeholder="Number" ng-model="building.number">
+        </label>
+        <label class="item item-input">
+            <input type="text" placeholder="Street" ng-model="building.street">
+        </label>
+        <label class="item item-input">
+            <input type="text" placeholder="City" ng-model="building.city">
+        </label>
+   <label class="item item-input">
+        <input type="text" placeholder="State" ng-model="building.state">
+   </label>
+   <label class="item item-input">
+        <input type="text" placeholder="Zip" ng-model="building.zip">
+   </label>
+   <a class="button item-button" ng-click="add()" href="#/tab/buildings">
+       Save
+    </a>
+</div>
+    </ion-content>
+
+</ion-view>
