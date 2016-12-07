@@ -28,11 +28,9 @@ angular.module('directory.controllers', [])
 
     //TODO: should this be all part of the buildingslistctrl? 
     .controller('NewBuildingCtrl', function ($scope, Buildings) {
-        console.log('new building'); 
         $scope.building = {};
         $scope.add = function() {
             Buildings.save($scope.building, function(res) {
-                console.log("got it!");
                 console.log(res);
 
             });
@@ -48,17 +46,27 @@ angular.module('directory.controllers', [])
     .controller('NewPropertybyBuildingsListCtrl', function ($scope, $stateParams, Employees) {
         console.log('new-property'); 
         $scope.buildingId = $stateParams.buildingId;
-        $scope.property = {buildingId: $scope.buildingId};
-        $scope.add = function() {
+        $scope.property = {
+            unit: "",
+            guests: 0, 
+            bedrooms: 0, 
+            beds: 0, 
+            bedrooms: 0,
+            bathrooms: 0,
+            buildingId: $scope.buildingId
+        };
+        $scope.save = function() {
+            console.log($scope.property)
             Employees.save($scope.property, function(res) {
                 console.log(res);
             });
         }
     })
-
-    .controller('PropertiesbyBuildingsListCtrl', function ($scope, $stateParams, Buildings) {
+    //TODO: check if these should use "query"
+    .controller('PropertiesbyBuildingsListCtrl', function ($scope, $stateParams, Buildings, Employees) {
         console.log('properties-by-building'); 
-        $scope.building = Buildings.get({buildingId: $stateParams.buildingId, data: 'properties'});
+        $scope.building = Buildings.get({buildingId: $stateParams.buildingId});
+        $scope.properties = Buildings.query({buildingId: $stateParams.buildingId, data: 'properties'});
     })
 
     .controller('DashCtrl', function ($scope, $stateParams, Buildings) {

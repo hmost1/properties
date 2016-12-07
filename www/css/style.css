@@ -93,3 +93,40 @@ a.item-content {
     font-family: "fontawesome";
     content: "\f2cd";
 }
+
+button.value-decrease {
+  border-right-color: #F0F3F8 !important;;
+  padding-right: 20px !important;;
+}
+
+button.value-increase {
+  border-left-color: #F0F3F8 !important;;
+  padding-left: 20px !important;;
+}
+
+.value-display { 
+    margin-bottom: 20px;
+}
+
+.app-background { 
+    background-color: #F0F3F8;
+}
+
+.bar button.icon-color.icon {
+    color: #F26363;
+}
+
+.bar .button.icon-color {
+    color: #F26363;
+}
+
+.bar .text-color.title {
+    color: #F26363;
+}
+
+.button-salmon {
+    background-color: #F26363;
+    color: white;
+}
+
+

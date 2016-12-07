@@ -1,26 +1,40 @@
 <ion-view title="New Space">
-    <ion-content has-header="true" padding="true">
-
+  <ion-content has-header="true" padding="true">
+    <h3 class="text-center"> 
+      Just a little more about
+      <p> your apartment ... </p>
+    </h3>
     <div class="list">
-      <label class="item item-input">
-            <input type="text" placeholder="Apt Number" ng-model="property.apt">
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Max Guests" ng-model="property.guests">
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Bedrooms" ng-model="property.bedrooms">
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="Beds" ng-model="property.beds">
-        </label>
-   <label class="item item-input">
-        <input type="text" placeholder="Bathrooms" ng-model="property.bathrooms">
-   </label>
-   <a class="button item-button" ng-click="add()" href="#/tab/buildings/{{buildingId}}/properties">
-       Save
+      <div class="row item value-display">
+            <input class="text-center" type="text" placeholder="Unit number" ng-model="property.unit_number">
+      </div>
+      <div class="text-center"> Max Guests </div>
+      <div class="row item bar bar-light value-display">
+            <button class="button button-clear icon ion-minus value-decrease icon-color"></button>
+            <h1 class="title text-color">{{property.guests}}</h1>
+            <button class="button button-clear icon ion-plus value-increase icon-color"></button>        
+      </div>
+      <div class="text-center"> Bedrooms </div>
+       <div class="row item bar bar-light value-display">
+            <button class="button button-clear icon ion-minus value-decrease icon-color" ng-click="property.bedrooms = property.bedrooms-1"></button>
+            <h1 class="title text-color" ng-model="property.bedrooms">{{property.bedrooms}}</h1>
+            <button class="button button-clear icon ion-plus value-increase icon-color" ng-click="property.bedrooms = property.bedrooms+1"></button>        
+      </div>
+      <div class="text-center"> Bedrooms </div>
+       <div class="row item bar bar-light value-display">
+            <button class="button button-clear icon ion-minus value-decrease icon-color"></button>
+            <h1 class="title text-color">{{property.beds}}</h1>
+            <button class="button button-clear icon ion-plus value-increase icon-color"></button>        
+      </div>
+      <div class="text-center"> Bathrooms </div>
+       <div class="row item bar bar-light value-display">
+            <button class="button button-clear icon ion-minus value-decrease icon-color"></button>
+            <h1 class="title text-color">{{property.bathrooms}}</h1>
+            <button class="button button-clear icon ion-plus value-increase icon-color"></button>        
+      </div>
+    </div>
+    <a class="button button-block button-salmon" ng-click="save()" href="#/tab/buildings/{{property.buildingId}}/properties">
+      Save
     </a>
-</div>
-    </ion-content>
-
+  </ion-content>
 </ion-view>

@@ -15,17 +15,17 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/properties', employees.findAll);
-app.get('/properties/:id', employees.findById);
+app.get('/properties/:id', employees.findByIdDB/*employees.findById*/);
 app.get('/properties/:id/stats', employees.findReports);
 app.post('/properties', employees.addNewProperty);
 
-app.get('/buildings', employees.findAllBuildings);
+app.get('/buildings', employees.findAllDB /*employees.findAllBuildings*/);
 app.get('/buildings/:id', employees.findBuildingById);
-app.get('/buildings/:id/properties', employees.findAllFromBuilding);
+app.get('/buildings/:id/properties', employees.findAllFromBuildingDB);
 app.post('/buildings', employees.addNewBuilding);
 
 //TODO: not sure if this needs to be structured like that 
-app.get('/buildings/:buildingId/properties/:id', employees.findById);
+app.get('/buildings/:buildingId/properties/:id', employees.findByIdDB);
 //app.post('/buildings/:buildingId/properties', employees.addNewProperty);
 
 app.set('port', process.env.PORT || 5000);
