@@ -1,3 +1,6 @@
+var pq = require('pg');
+var db = require('./db');
+
 //TODO: not sure why this is in "routes"
 //should be models, handle db stuff here 
 
@@ -28,6 +31,38 @@ var buildings = [
     {"id": 3, "vacant": 0, "occupied": 3, "description": "SF split victorian", "street": "Clay Street","number": "2973","city": "San Francisco", "state": "CA", "zip":"94115"}
 ]
 
+//DB STUFF: 
+var config = {
+  user: 'haley', //env var: PGUSER
+  database: 'property_app', //env var: PGDATABASE
+  //password: '', //env var: PGPASSWORD
+  host: 'localhost', // Server hosting the postgres database
+  port: 5432, //env var: PGPORT
+  max: 10, // max number of clients in the pool
+  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+};
+var pg = require("pg");
+var pool = new pg.Pool(config);
+pool.on('error', function (err, client) {
+  // if an error is encountered by a client while it sits idle in the pool
+  // the pool itself will emit an error event with both the error and
+  // the client which emitted the original error
+  // this is a rare occurrence but can happen if there is a network partition
+  // between your application and the database, the database restarts, etc.
+  // and so you might want to handle it and at least log it out
+  console.error('idle client error', err.message, err.stack)
+})
+
+//TODO: when to call next?
+exports.findAllDB = function(req, res, next) {
+    var sql = "SELECT * from buildings";
+    //TODO: make parameter option in db.query null 
+    db.query(sql, [], function(results) {
+        console.log("got results");
+        res.send(results.rows);
+    });
+}
+
 exports.findAll = function (req, res, next) {
     var name = req.query.name;
     if (name) {
@@ -38,11 +73,48 @@ exports.findAll = function (req, res, next) {
         res.send(properties);
     }
 };
-
-exports.findById = function (req, res, next) {
-    var id = req.params.id;
-    res.send(properties[id]);
+exports.findByIdDB = function (req, res, next) {
+    var sql = "SELECT * from units where id = $1"
+    db.query(sql, [req.params.id], function(results) {
+        console.log(results.rows);
+        res.send(results.rows[0]); 
+    });
 };
+
+exports.findAllFromBuildingDB = function(req, res, next) {
+    var id = parseInt(req.params.id),
+        response,
+        spaces = [],
+        property;
+    
+    var sql = "SELECT * from units where building_id = $1";
+    db.query(sql, [id], function(results) {
+        res.send(results.rows);
+    });
+    //response = {
+    //    id: id,
+    //    number: buildings[id-1].number,
+    //    street: buildings[id-1].street,
+    //    city: buildings[id-1].city,
+    //    description: buildings[id-1].description
+    //}
+//
+    //for (var i=0; i<properties.length; i++) {
+    //    property = properties[i];
+//
+    //    if (property.buildingId === id) {
+    //        spaces.push(property);        
+    //    }
+    //}
+//
+    //response.properties = spaces;
+    //res.send(response);
+}
+
+//exports.findById = function (req, res, next) {
+//    var id = req.params.id;
+//    res.send(properties[id]);
+//};
 
 exports.findReports = function (req, res, next) {
     var id = parseInt(req.params.id),
@@ -71,15 +143,19 @@ exports.findReports = function (req, res, next) {
 };
 
 //todo: add search
-exports.findAllBuildings = function (req, res, next) {
-    res.send(buildings);
-};
+//exports.findAllBuildings = function (req, res, next) {
+//    res.send(buildings);
+//};
 
 //To be exported into buildings
 exports.findBuildingById = function (req, res, next) {
-    var id = req.params.id;
-    res.send(buildings[id]);
+    var sql = "SELECT * from buildings where id = $1"
+    db.query(sql, [req.params.id], function(results) {
+        console.log(results.rows);
+        res.send(results.rows[0]); 
+    });
 };
+
 
 //all the properties in this building
 exports.findAllFromBuilding = function(req, res, next) {
@@ -109,25 +185,32 @@ exports.findAllFromBuilding = function(req, res, next) {
 }
 
 exports.addNewBuilding = function(req, res, next) {
+    var sql = "INSERT into buildings VALUES (DEFAULT, $1, $2, $3 ,$4, $5)"; 
+    var building = [req.body.number, req.body.street, req.body.city, req.body.state, req.body.zip];
 
-    //todo: building object, new building()
-    var building = req.body; 
-    building.id = buildings.length + 1;
-    building.vacant = 0; 
-    building.occupied = 0;
-    buildings.push(building);
-    
-    res.send(200)
+    db.query(sql, building, function(results) {
+        console.log(results.rows[0]);
+        res.send(200); 
+    });
 }
 
 exports.addNewProperty = function(req, res, next) {
-    //todo: property object, new property()
-    var property = req.body;
-    property.id = properties.length + 1; 
-    property.buildingId = parseInt(property.buildingId);
-    properties.push(property);
-    
-    buildings[property.buildingId-1].vacant += 1;
+    var sql = "INSERT into units VALUES (DEFAULT, $1, $2, $3 ,$4, $5, 150.00)"; 
 
-    res.send(200);
+
+    //insert into units VALUES (DEFAULT, 1, 'D', 2, 2, 2, 100.00);
+    //todo: property object, new property()
+    //var property = req.body;
+    //property.id = properties.length + 1; 
+    //property.buildingId = parseInt(property.buildingId);
+    //properties.push(property);
+    
+    //TODO: do you need parseInt?
+    var property = [parseInt(req.body.buildingId), req.body.unit_number, req.body.bedrooms, req.body.bathrooms, req.body.beds];
+    //"apt":"A", "bedrooms":3, "bathrooms":1.5, "nightly":100.00}
+    
+    db.query(sql, property, function(results) {
+        console.log(results.rows[0]);
+        res.send(200); 
+    });
 }
