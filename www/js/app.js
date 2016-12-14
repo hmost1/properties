@@ -18,26 +18,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
 
         $stateProvider
 
-            //.state('search', {
-            //    url: '/search',
-            //    templateUrl: 'templates/employee-list.html',
-            //    controller: 'EmployeeListCtrl'
-            //})
-//
-            //.state('employee', {
-            //    url: '/properties/:employeeId',
-            //    templateUrl: 'templates/employee-detail.html',
-            //    controller: 'EmployeeDetailCtrl'
-            //})
-//
-            //.state('reports', {
-            //    url: '/properties/:employeeId/reports',
-            //    templateUrl: 'templates/employee-reports.html',
-            //    controller: 'EmployeeReportsCtrl'
-            //})
-
-            //Tabs: 
-            // setup an abstract state for the tabs directive
+  
             .state('tab', {
             url: "/tab",
             abstract: true,
@@ -106,6 +87,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
                 }}
             })
 
+            .state('tab.buildings-edit', {
+                url: '/buildings/:buildingId/edit',
+                views: {
+                "tab-buildings": {
+                    templateUrl: 'templates/buildings-new.html',
+                    controller: 'EditBuildingCtrl'
+                }}
+            })
+
             .state('tab.buildings-new', {
                 url: '/buildings/new',
                 views: {
@@ -140,6 +130,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
                 "tab-buildings": {
                     templateUrl: 'templates/employee-detail.html',
                     controller: 'EmployeeDetailCtrl'
+                }}
+            })
+
+            .state('tab.properties-edit', {
+                url: '/buildings/:buildingId/properties/:propertyId/edit',
+                views: {
+                "tab-buildings": {
+                    templateUrl: 'templates/properties-new.html',
+                    controller: 'EditPropertyCtrl'
                 }}
             })
 

@@ -12,9 +12,11 @@
             <ion-item ng-repeat="property in properties" type="item-text-wrap" class="item-avatar" href="#/tab/buildings/{{building.id}}/properties/{{property.id}}">
                 <div class='horizontal building-address text-center'>Apt {{property.unit_number}}</div>
                 <div class='horizontal building-info'>
-                Furnished
-                <p> {{property.bedrooms}} BR / {{property.bathrooms}} BR; {{building.squareFeet}} SF </p>
+                {{property.furnished ? "Furnished" : "Unfurnished"}}
+                <p> {{property.bedrooms}} BR / {{property.bathrooms}} BR; {{building.squareFeet}} {{building.city}} </p>
                 </div>
+                <a class="button button-icon icon ion-edit" href="#/tab/buildings/{{building.id}}/properties/{{property.id}}/edit"></a>
+                <a class="button button-icon icon ion-trash-b" ng-click="delete(property.id)"></a>
             </ion-item>
             <ion-item> 
                 <a class="button item-icon-left" href="#/tab/buildings/{{building.id}}/properties/new">

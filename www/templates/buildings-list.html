@@ -13,13 +13,15 @@
                       href="#/tab/buildings/{{building.id}}/properties">
                 <div class='horizontal building-address'>{{building.number}}<p>{{building.street}}</div>
                 <div class='horizontal building-info'>{{building.city}}, {{building.state}}
-                    <p>{{building.vacant + building.occupied || 0}} Units total
+                    <p>{{building.units || 0}} {{building.units == 1 ? "Unit" : "Units"}} total
                         <span ng-class="(building.vacant==0) ? 'red' : 'green'">{{building.vacant}}
                             <ng-pluralize count="building.vacant" when="{'1':'vacancy','other':'vacancies'}">
                             </ng-pluralize>
                         </span>
                     </p>
                 </div>
+                <a class="button button-icon icon ion-edit" href="#/tab/buildings/{{building.id}}/edit"></a>
+                <a class="button button-icon icon ion-trash-b" ng-click="delete(building.id)"></a>
             </ion-item>
            
             <ion-item> 

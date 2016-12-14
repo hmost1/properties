@@ -3,9 +3,17 @@ angular.module('directory.services', ['ngResource'])
     .factory('Employees', function ($resource) {
         return $resource('/properties/:employeeId/:data');
     })
+    //TODO: figure out how th is is supposed to be structured wrt to buildings
+    .factory('Properties', function ($resource) {
+        return $resource('/buildings/:buildingId/properties/:id/:data');
+    })
 
     .factory('Buildings', function ($resource) {
         return $resource('/buildings/:buildingId/:data');
+    })
+
+    .factory('Reservations', function ($resource) {
+        return $resource('/reservations/:data');
     });
 
 

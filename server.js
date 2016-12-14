@@ -14,19 +14,29 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.get('/properties', employees.findAll);
-app.get('/properties/:id', employees.findByIdDB/*employees.findById*/);
-app.get('/properties/:id/stats', employees.findReports);
+//app.get('/properties', employees.findAll);
+//app.get('/properties/:id', employees.findUnitById/*employees.findById*/);
+
+//TODO: should this be /buildings/:id/properties
 app.post('/properties', employees.addNewProperty);
+
 
 app.get('/buildings', employees.findAllDB /*employees.findAllBuildings*/);
 app.get('/buildings/:id', employees.findBuildingById);
-app.get('/buildings/:id/properties', employees.findAllFromBuildingDB);
+app.get('/buildings/:id/properties', employees.findAllFromBuilding);
 app.post('/buildings', employees.addNewBuilding);
+app.post('/buildings/:id', employees.updateBuilding);
+app.delete('/buildings/:id', employees.deleteBuilding);
 
 //TODO: not sure if this needs to be structured like that 
-app.get('/buildings/:buildingId/properties/:id', employees.findByIdDB);
-//app.post('/buildings/:buildingId/properties', employees.addNewProperty);
+app.get('/buildings/:buildingId/properties/:id', employees.findUnitById);
+app.post('/buildings/:buildingId/properties/:id', employees.updateProperty);
+app.delete('/buildings/:buildingId/properties/:id', employees.deleteProperty);
+
+//reservations
+app.get('/reservations', reservations.getAll);
+app.post('/reservations', reservations.create);
+
 
 app.set('port', process.env.PORT || 5000);
 
