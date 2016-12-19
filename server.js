@@ -1,5 +1,6 @@
 var express = require('express'),
     employees = require('./routes/employees'),
+    reservations = require('./routes/reservations'),
     bodyParser = require('body-parser'),
     app = express();
     
@@ -14,7 +15,7 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-//app.get('/properties', employees.findAll);
+app.get('/properties', employees.findAllProperties);
 //app.get('/properties/:id', employees.findUnitById/*employees.findById*/);
 
 //TODO: should this be /buildings/:id/properties
@@ -36,7 +37,7 @@ app.delete('/buildings/:buildingId/properties/:id', employees.deleteProperty);
 //reservations
 app.get('/reservations', reservations.getAll);
 app.post('/reservations', reservations.create);
-
+app.post('/reservations/:id', reservations.delete);
 
 app.set('port', process.env.PORT || 5000);
 

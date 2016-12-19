@@ -107,7 +107,7 @@ angular.module('directory.controllers', [])
             $scope.properties=res;
           });
         };
-        
+
        updateList();
        $scope.building = Buildings.get({buildingId: $stateParams.buildingId}); 
 
@@ -143,6 +143,12 @@ angular.module('directory.controllers', [])
         $scope.property.$save({buildingId: $stateParams.buildingId, id: $stateParams.propertyId}); 
       }
     })
+    //TODO: this is actually reservations. 
+    .controller('GuestsCtrl', function ($scope, $stateParams, Reservations, Units) {
+        console.log('guests/rervations-ctrl'); 
+
+        $scope.reservations = Reservations.query(); 
+    })
 
     .controller('DashCtrl', function ($scope, $stateParams, Buildings) {
         console.log('dash-ctrl'); 
@@ -151,9 +157,30 @@ angular.module('directory.controllers', [])
     .controller('CalendarCtrl', function ($scope, $stateParams, Buildings) {
         console.log('cal-ctrl'); 
     })
+    
+    .controller('GuestsCtrl', function ($scope, $stateParams, Buildings, Employees, Reservations) {
+      console.log('guests-ctrl'); 
+      $scope.reservations = Reservations.query();
+    })
 
-    .controller('GuestsCtrl', function ($scope, $stateParams, Buildings) {
-        console.log('guests-ctrl'); 
+    .controller('NewReservationCtrl', function ($scope, $stateParams, Employees, Reservations) {
+      console.log('new res ctrl'); 
+      $scope.properties = Employees.query();
+      
+      $scope.data = {
+          unit_id: null, 
+          start_day: new Date(), 
+          end_day: null, 
+          first_name: "", 
+          phone: "",
+          email: "", 
+          adults: 0, 
+          children: 0
+      };
+        $scope.save = function() {
+          Reservations.save($scope.data);
+          //TODO: how to get the last selected item 
+        };
     })
 
     .controller('SettingsCtrl', function ($scope, $stateParams, Buildings) {

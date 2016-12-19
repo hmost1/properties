@@ -1,0 +1,50 @@
+<ion-view title="New Reservation">
+	<ion-content>
+     <div class="list">
+        <div class="row">
+          <div class="col-50">
+            <label >From</label>
+            <div class="button button-medium" ion-datetime-picker ng-model="data.start_day">
+            {{data.start_day | date: "yyyy-MM-dd"}}
+            </div> 
+          </div> 
+          <div class="col-50">
+            <label>To</label>
+            <div class="button button-medium" ion-datetime-picker ng-model="data.end_day">
+            {{data.end_day | date: "yyyy-MM-dd"}}
+            </div>
+          </div>
+        </div> 
+        <div class="row">
+          <select class="item bar bar-light value-display col-33  col-offset-33" ng-model="data.unit_id">
+            <option ng-repeat="property in properties" type="item-text-wrap" value="{{property.id}}">{{property.street}}, Unit: {{property.unit_number}}</option>
+          </select>
+        </div>
+        <div class="row">
+         <input class="text-center col-offset-33 col-33 value-display column-inputs" type="text" placeholder="First Name" ng-model="data.first_name">
+        </div>
+        <div class="row">
+          <input class="text-center col-offset-33 col-33 value-display column-inputs" type="text" placeholder="Phone" ng-model="data.phone">
+        </div>
+        <div class="row">
+          <input class="text-center  value-display column-inputs" type="email" placeholder="Email" ng-model="data.email">
+        </div>
+        <div class="text-center"> Adults </div>
+        <div class="row item bar bar-light value-display">
+          <button class="button button-clear icon ion-minus value-decrease icon-color" ng-click="data.adults = data.adults-1"></button>
+          <h1 class="title text-color">{{data.adults}}</h1>
+          <button class="button button-clear icon ion-plus value-increase icon-color" ng-click="data.adults = data.adults+1"></button> 
+        </div>
+        <div class="text-center"> Children </div>
+        <div class="row item bar bar-light value-display">
+          <button class="button button-clear icon ion-minus value-decrease icon-color" ng-click="data.children = data.children-1"></button>
+          <h1 class="title text-color">{{data.children}}</h1>
+          <button class="button button-clear icon ion-plus value-increase icon-color" ng-click="data.children = data.children+1"></button>     
+       </div>
+       <div class="row">
+          <a class="button button-salmon" ng-click="save()" href="#/tab/guests">Save</a>
+          <a class="button button-salmon" ng-click="cancel()">Cancel</a>
+       </div>
+    </div>
+ 	</ion-content>
+</ion-view>

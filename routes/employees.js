@@ -1,4 +1,3 @@
-var pq = require('pg');
 var db = require('./db');
 
 //TODO: not sure why this is in "routes"
@@ -15,6 +14,15 @@ exports.findAllDB = function(req, res, next) {
     });
 }
 
+exports.findAllProperties = function(req, res, next) {  
+    var sql = "SELECT units.*,buildings.street from buildings left join units on buildings.id = units.building_id;"
+    
+    //TODO: make parameter option in db.query null 
+    db.query(sql, [], function(results) {
+        res.send(results.rows);
+    });
+}
+
 exports.findAll = function (req, res, next) {
     var name = req.query.name;
     if (name) {
@@ -25,6 +33,7 @@ exports.findAll = function (req, res, next) {
         res.send(properties);
     }
 };
+
 exports.findUnitById = function (req, res, next) {
     var sql = "SELECT * from units where id = $1 and building_id = $2"
     db.query(sql, [req.params.id, req.params.buildingId], function(results) {

@@ -1,5 +1,21 @@
-<ion-view title="Guests">
-	<ion-content>
-		<img class="centered" src="pics/guests.png"/>
-	</ion-content>
+<ion-view title="Reservations">
+  <ion-content class="has-header has-subheader">
+      <!--TODO: check box for "show past reservations" -->
+      <div class="row header">
+        <div class="col">Unit</div>
+        <div class="col">Guest</div>
+        <div class="col">Move In</div>
+        <div class="col">Move Out</div>
+      </div>
+      <div ng-repeat="reservation in reservations" type="item-text-wrap" class="row"
+                  href="#/tab/reservations/{{reservation.id}}"> <!--TODO: not sure where this should go -->
+            <div class="col">{{reservation.street}}, {{reservation.city}} <p>Unit: {{reservation.unit_number}}<p></div>
+            <div class="col">{{reservation.email}}</div>
+            <div class="col">{{reservation.start_day | date: "yyyy-MM-dd"}}</div>
+            <div class="col">{{reservation.end_day | date: "yyyy-MM-dd"}}</div>
+        </div> 
+            <a class="button item-icon-left" href="#/tab/guests/new">
+                <i class="icon ion-plus"></i>
+            </a>
+  </ion-content>
 </ion-view>

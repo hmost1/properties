@@ -13,7 +13,6 @@ var config = {
   database: params.pathname.split('/')[1],
   ssl: true
 };
-console.log(config);
 
 //TODO: just a quick POC, want to only initialize once, then let query get called
 //for every connection and query. 

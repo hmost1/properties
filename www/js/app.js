@@ -1,4 +1,4 @@
-angular.module('directory', ['ionic', 'directory.controllers', 'directory.services'])
+angular.module('directory', ['ionic', 'ion-datetime-picker', 'directory.controllers', 'directory.services'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -54,6 +54,19 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
                     'tab-guests': {
                         templateUrl: 'templates/guests.html',
                         controller: 'GuestsCtrl'
+                    }
+                }
+            })
+
+            //TODO: guests == reservations
+
+            // Each tab has its own nav history stack:
+            .state('tab.reservations-new', {
+                url: '/guests/new',
+                views: {
+                    'tab-guests': {
+                        templateUrl: 'templates/reservations-new.html',
+                        controller: 'NewReservationCtrl'
                     }
                 }
             })

@@ -13,7 +13,7 @@ angular.module('directory.services', ['ngResource'])
     })
 
     .factory('Reservations', function ($resource) {
-        return $resource('/reservations/:data');
+        return $resource('/reservations/:id/:data');
     });
 
 
