@@ -150,11 +150,54 @@ angular.module('directory.controllers', [])
         $scope.reservations = Reservations.query(); 
     })
 
-    .controller('DashCtrl', function ($scope, $stateParams, Buildings) {
+    .controller('DashCtrl', function ($scope, $stateParams, Buildings, Reservations) {
+        var today = new Date();
+        var tomorrow = new Date().setDate(today.getDate()+1);
+        var dayAfter = new Date().setDate(today.getDate()+2);
+
+        //Today
+        Reservations.query({arrive: today}, function(res) {
+          $scope.arriveToday = res.length; 
+        });
+        Reservations.query({depart: today}, function(res) {
+          $scope.departsToday = res.length; 
+        });
+
+        //Tomorrow
+        Reservations.query({arrive: tomorrow}, function(res) {
+          $scope.arriveTomorrow = res.length; 
+        });
+        Reservations.query({depart: tomorrow}, function(res) {
+          $scope.departsTomorrow = res.length; 
+        });
+
+        //Day after Tomorrow
+        Reservations.query({arrive: dayAfter}, function(res) {
+          $scope.arriveDayAfter = res.length; 
+        });
+        Reservations.query({depart: dayAfter}, function(res) {
+          $scope.departsDayAfter = res.length; 
+        });        
         console.log('dash-ctrl'); 
     })
 
-    .controller('CalendarCtrl', function ($scope, $stateParams, Buildings) {
+    .controller('CalendarCtrl', function ($scope, $stateParams, Buildings, Reservations) {
+        //var date = new Date();
+        //console.log(today);
+        ////Today
+        //$scope.arriveToday = Reservations.get({arrives: date})
+        //$scope.departsToday = Reservations.get({departs: date})
+//
+        ////Tomorrow
+        //date.setDate(date.getDate() + 1)
+        //$scope.arriveTomorrow = Reservations.get({arrives: date})
+        //$scope.departsTomorrow = Reservations.get({departs: date})
+ //
+        ////Day after Tomorrow
+        //date.setDate(date.getDate() + 1)
+        //$scope.arriveTwoDays = Reservations.get({arrives: date})
+        //$scope.departsTwoDays = Reservations.get({departs: date})
+
         console.log('cal-ctrl'); 
     })
     

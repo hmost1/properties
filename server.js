@@ -36,6 +36,7 @@ app.delete('/buildings/:buildingId/properties/:id', employees.deleteProperty);
 
 //reservations
 app.get('/reservations', reservations.getAll);
+app.get('/reservations/counts', reservations.getCounts);
 app.post('/reservations', reservations.create);
 app.post('/reservations/:id', reservations.delete);
 

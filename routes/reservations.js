@@ -1,11 +1,29 @@
 var db = require('./db');
+var dateFormat = require('dateformat');
+
 
 //TODO: when to call next?
+//TODO: this is also used with query parameters, but typically those just need counts.
+//should figure out if that should be it's own function since it's not optimizing
 exports.getAll = function(req, res, next) {
-    var sql = "SELECT reservations.*, units.unit_number, buildings.street, buildings.city from reservations left join units on units.id = reservations.unit_id left join buildings on buildings.id = units.building_id;"
-    console.log("selecting");
+    var sql = "SELECT reservations.*, units.unit_number, buildings.street, buildings.city from ";
+    if (req.query.arrive) {
+        sql += "(SELECT * from reservations where start_day = '" + dateFormat(JSON.parse(req.query.arrive), "yyyy-mm-dd").toString() + "') reservations";
+    }
+    else if (req.query.depart) {
+        sql += "(SELECT * from reservations where end_day = '" + dateFormat(JSON.parse(req.query.depart), "yyyy-mm-dd").toString() + "') reservations";
+    }
+    else {
+        sql += "reservations";
+    }
+    sql += " left join units on units.id = reservations.unit_id left join buildings on buildings.id = units.building_id;";
+
     //TODO: make parameter option in db.query null 
-    db.query(sql, [], function(results) {
+    db.query(sql, [], function(results, error) {
+        if (error){
+            console.log(error);
+        }
+        //console.log(results.rows.length);
         res.send(results.rows);
     });
 }
@@ -23,6 +41,17 @@ exports.create = function(req, res, next) {
 }
 
 exports.delete = function(req, res, next) {
+    var sql = "DELETE from reservations where id = $1;"
+    db.query(sql, [req.params.id], function(results) {
+        res.send(200); 
+    });
+}
+
+exports.getCounts = function(req, res, next) {
+    //var sql = "SELECT count(*) from reservations where start_day = $1;"
+    console.log(req.body);
+    return 10;
+
     var sql = "DELETE from reservations where id = $1;"
     db.query(sql, [req.params.id], function(results) {
         res.send(200); 

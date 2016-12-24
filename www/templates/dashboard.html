@@ -1,5 +1,52 @@
 <ion-view title="Dashboard">
-    <ion-content class="has-header has-subheader">
-		<img class="centered" src="pics/dashboard.png"/>
+	<ion-content class="has-header has-subheader">
+    	<!--
+		<img class="centered" src="pics/dashboard.png"/>-->
+	 <div class="card">
+      <div class="item item-divider">
+        Today
+      </div>
+      <div class="row">
+        <div class="item col-50 green-back white-text">
+          Arrivals {{arriveToday || 0}}
+        </div>
+        <div class="item col-50 blue-back white-text">
+          Departures {{departsToday || 0}}
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Tomorrow
+      </div>
+      <div class="row">
+        <div class="item col-50 green-back white-text">
+          Arrivals {{arriveTomorrow || 0}}
+        </div>
+        <div class="item col-50 blue-back white-text">
+          Departures {{departsTomorrow || 0}}
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Day after Tomorrow 
+      </div>
+      <div class="row">
+        <div class="item col-50 green-back white-text">
+          Arrivals {{arriveDayAfter || 0}}
+        </div>
+        <div class="item col-50 blue-back white-text">
+          Departures {{departsDayAfter || 0}}
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+       Placeholder for month averages
+      </div>
+      <div class="item item-text-wrap">
+      </div>
+    </div>
 	</ion-content>
 </ion-view>

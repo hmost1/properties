@@ -134,6 +134,16 @@ button.value-increase {
     padding-left: 10px;
 }
 
+.blue-back {
+    background-color: blue;
+}
+.green-back {
+    background-color: green;
+}
+.white-text {
+    color: white;
+}
+
 //removes the input number incremenet thing 
 //TODO: not working... : (
 input[type=number]::-webkit-inner-spin-button, 
@@ -141,5 +151,6 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
 
 
